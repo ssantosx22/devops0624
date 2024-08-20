@@ -7,13 +7,21 @@ Vagrant.configure("2") do |config|
 		controle.vm.hostname = "controle"
 		controle.vm.network "private_network", ip: "172.17.177.100" 
 		controle.vm.provider "virtualbox" do |vb|
-			vb.gui = true
-			vb.memory = "1024"
+			vb.gui = false
+			vb.memory = "4096"
 			vb.cpus = 2
 			vb.name = "controle"
 		end
 		controle.vm.provision "ansible_local" do |ansible|
 			ansible.playbook = "playbook.yml"
+			ansible.install_mode = "pip"
+		end
+		controle.vm.provision "ansible_local" do |ansible|
+			ansible.playbook = "installdocker.yml"
+			ansible.install_mode = "pip"
+		end
+		controle.vm.provision "ansible_local" do |ansible|
+			ansible.playbook = "installjenkins.yml"
 			ansible.install_mode = "pip"
 		end
 	end
@@ -22,7 +30,7 @@ Vagrant.configure("2") do |config|
                 web.vm.hostname = "web"
                 web.vm.network "private_network", ip: "172.17.177.101"
                 web.vm.provider "virtualbox" do |vb|
-                        vb.gui = true
+                        vb.gui = false
                         vb.memory = "512"
                         vb.cpus = 2
                         vb.name = "web"
@@ -34,7 +42,7 @@ Vagrant.configure("2") do |config|
                 db.vm.network "private_network", ip: "172.17.177.102"
 		db.disksize.size = "20GB"
                 db.vm.provider "virtualbox" do |vb|
-                        vb.gui = true
+                        vb.gui = false
                         vb.memory = "512"
                         vb.cpus = 2
                         vb.name = "db"

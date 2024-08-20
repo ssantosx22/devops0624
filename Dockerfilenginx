@@ -1,0 +1,17 @@
+FROM debian:12
+MAINTAINER Rogério Silva
+
+# Atualiza a lista de pacotes e instala o nginx
+RUN apt-get update && \
+    apt-get install -y nginx
+
+# Copia o arquivo de configuracao do nginx
+COPY /nginx/nginx.conf /etc/nginx.conf
+
+# Expõe a porta 80
+EXPOSE 80
+
+# Configura o comando de inicializacao do nginx
+ENTRYPOINT ["nginx"]
+CMD ["-g", "daemon off;"]
+
