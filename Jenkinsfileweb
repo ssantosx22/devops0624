@@ -4,16 +4,11 @@ pipeline {
     stages {
         stage('Executar playbook Ansible') {
             steps {
-		withCredentials([string(CredentialsId: 'ssh_passkey')]) {
                 ansiblePlaybook(
                     inventory:'ansible/hosts',
                     playbook:'ansible/installweb.yml',
-			extraVars: [
-				ssh_passphrase: "${envi.SSH_PASSKEY}"
-			]
                 )
             }
         }
     }
-}
 }
