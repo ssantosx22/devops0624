@@ -5,7 +5,7 @@ pipeline {
         stage('Executar playbook Ansible') {
             steps {
                 withCredentials([
-			string(credentialsId: 'ssh_phrase', variable: 'ANSIBLE_PASSPHRASE')
+			string(credentialsId: 'ssh_passphrase', variable: 'ANSIBLE_PASSPHRASE')
 		]) {
 		    sh '''
 			eval $(ssh-agent -s)
