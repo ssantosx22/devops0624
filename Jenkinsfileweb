@@ -4,10 +4,15 @@ pipeline {
     stages {
         stage('Executar playbook Ansible') {
             steps {
-                ansiblePlaybook(
-                    inventory:'ansible/hosts',
-                    playbook:'ansible/installweb.yml',
-                )
+                withCredentials([
+			string(credentialsId: 'ssh_phrase', variable: 'ANSIBLE_PASSPSRASE')
+		]) {
+		    sh '''
+			eval $(ssh-agent -s)
+                    	echo "ANSIBLE_PASSPHRASE" | ssh-add /var/ssh/key/is_rsa
+                        ansible-playbook -i ansible/host ansible/installweb.yml
+		    '''
+		}  
             }
         }
     }
