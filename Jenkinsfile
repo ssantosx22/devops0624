@@ -38,7 +38,7 @@ pipeline {
 
                 // Realize os testes nos serviços em execução
                 // Exemplo de teste usando curl para verificar se o serviço web está respondendo
-                sh 'curl -I http://localhost:8000'
+                sh 'curl -I http://localhost:80'
 
                 sh 'docker-compose -f docker-compose.yml down'
             }
