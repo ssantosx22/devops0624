@@ -48,6 +48,5 @@ pipeline {
                 input 'Deseja prosseguir com o Deploy e Push?'
             }
         }
-
    }
 }
