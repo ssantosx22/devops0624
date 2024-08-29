@@ -17,7 +17,7 @@ pipeline {
                     def imageNameNginx = 'sergiosantosx22/nginx'
 
                     // Executa o build das imagens com os respectivos Dockerfiles
-                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhubsergio') {
+                    docker.withRegistry('https://registry.hub.docker.com', 'sergioantosx22) {
                         def webImage = docker.build("${imageNameWeb}:${DOCKER_IMAGE_TAG}", "-f ${DOCKERFILE_WEB} .")
                         def dbImage = docker.build("${imageNameDB}:${DOCKER_IMAGE_TAG}", "-f ${DOCKERFILE_DB} .")
                         def nginxImage = docker.build("${imageNameNginx}:${DOCKER_IMAGE_TAG}", "-f ${DOCKERFILE_NGINX} .")
